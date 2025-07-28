@@ -81,7 +81,7 @@ public class LinkedList<T> {
         return size;
     }
 
-    public boolean estaVazia() {
+    public boolean isEmpty() {
         return size == 0;
     }
     
