@@ -33,7 +33,7 @@ public class LinkedList<T> {
             novoNo.setNext(inicio);
             inicio = novoNo;
         } else {
-            Node<T> anterior = obterNo(index - 1);
+            Node<T> anterior = getNode(index - 1);
             Node<T> novoNo = new Node<>(value);
             novoNo.setNext(anterior.getNext());
             anterior.setNext(novoNo);
@@ -49,17 +49,17 @@ public class LinkedList<T> {
         if (index == 0) {
             inicio = inicio.getNext();
         } else {
-            Node<T> anterior = obterNo(index - 1);
+            Node<T> anterior = getNode(index - 1);
             anterior.setNext(anterior.getNext().getNext());
         }
         size--;
     }
 
-    public T obter(int index) throws MsgException {
-        return obterNo(index).getValue();
+    public T get(int index) throws MsgException {
+        return getNode(index).getValue();
     }
 
-    private Node<T> obterNo(int index) throws MsgException {
+    private Node<T> getNode(int index) throws MsgException {
         if (index < 0 || index >= size) {
             throw new MsgException("Índice inválido");
         }

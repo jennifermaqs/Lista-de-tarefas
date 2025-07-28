@@ -22,19 +22,19 @@ public class ListaDeTarefas {
     }
 
     public void marcarTarefaConcluida(int index) throws MsgException {
-        Tarefa tarefa = tarefas.obter(index);
+        Tarefa tarefa = tarefas.get(index);
         tarefa.marcar();
     }
 
     public void desmarcarTarefaConcluida(int index) throws MsgException {
-        Tarefa tarefa = tarefas.obter(index);
+        Tarefa tarefa = tarefas.get(index);
         tarefa.desmarcar();
     }
 
     public void removerTarefasConcluidas() throws MsgException {
         LinkedList<Tarefa> novasTarefas = new LinkedList<>();
         for (int i = 0; i < tarefas.getSize(); i++) {
-            Tarefa tarefa = tarefas.obter(i);
+            Tarefa tarefa = tarefas.get(i);
             if (!tarefa.isConcluida()) {
                 novasTarefas.add(tarefa);
             }
@@ -43,13 +43,34 @@ public class ListaDeTarefas {
     }
 
     public void exibirTarefas() throws MsgException {
-     //TODO
+        IO.println("\n |==== " + titulo + " ====|");
+        IO.println(" --- NÃO CONCLUIDAS ---");
+        boolean hasPendentes = false;
+        for (int i = 0; i < tarefas.getSize(); i++) {
+            Tarefa tarefa = tarefas.get(i);
+            if (!tarefa.isConcluida()) {
+                IO.println(i + ". " + tarefa);
+                hasPendentes = true;
+            }
+        }
+        if (!hasPendentes) IO.println("[Nenhuma tarefa pendente]");
+        
+        IO.println("\n  --- CONCLUÍDAS ---");
+        boolean hasConcluidas = false;
+        for (int i = 0; i < tarefas.getSize(); i++) {
+            Tarefa tarefa = tarefas.get(i);
+            if (tarefa.isConcluida()) {
+                IO.println(i + ". " + tarefa);
+                hasConcluidas = true;
+            }
+        }
+        if (!hasConcluidas) IO.println("[Nenhuma tarefa concluída]");
     }
 
     public int qntdTarefasPendentes() throws MsgException {
         int count = 0;
         for (int i = 0; i < tarefas.getSize(); i++) {
-            if (!tarefas.obter(i).isConcluida()) {
+            if (!tarefas.get(i).isConcluida()) {
                 count++;
             }
         }
@@ -58,7 +79,7 @@ public class ListaDeTarefas {
 
     public boolean todasTarefasConcluidas() throws MsgException {
         for (int i = 0; i < tarefas.getSize(); i++) {
-            if (!tarefas.obter(i).isConcluida()) {
+            if (!tarefas.get(i).isConcluida()) {
                 return false;
             }
         }
@@ -70,16 +91,3 @@ public class ListaDeTarefas {
     }
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-

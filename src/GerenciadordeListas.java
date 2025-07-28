@@ -18,7 +18,7 @@ public class GerenciadorDeListas {
     public void removerListasConcluidas() throws MsgException {
         LinkedList<ListaDeTarefas> novasListas = new LinkedList<>();
         for (int i = 0; i < listas.getSize(); i++) {
-            ListaDeTarefas lista = listas.obter(i);
+            ListaDeTarefas lista = listas.get(i);
             if (!lista.todasTarefasConcluidas()) {
                 novasListas.add(lista);
             }
@@ -26,8 +26,8 @@ public class GerenciadorDeListas {
         listas = novasListas;
     }
 
-    public ListaDeTarefas obterLista(int index) throws MsgException {
-        return listas.obter(index);
+    public ListaDeTarefas getLista(int index) throws MsgException {
+        return listas.get(index);
     }
 
     public int quantidadeListas() {
@@ -36,12 +36,12 @@ public class GerenciadorDeListas {
 
     public void exibirListas() throws MsgException {
         if (listas.getSize() == 0) {
-            IO.println("Nenhuma lista foi criada!");
+            IO.println("Nenhuma lista disponível");
             return;
         }
         
         for (int i = 0; i < listas.getSize(); i++) {
-            ListaDeTarefas lista = listas.obter(i);
+            ListaDeTarefas lista = listas.get(i);
             IO.println(i + " - " + lista.getTitulo() + " (" + lista.qntdTarefasPendentes() + " pendentes)");
         }
     }      

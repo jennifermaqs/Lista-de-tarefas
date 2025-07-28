@@ -82,7 +82,7 @@ public class Main {
             throw new MsgException("Índice inválido!");
         }
 
-        ListaDeTarefas lista = gerenciador.obterLista(index);
+        ListaDeTarefas lista = gerenciador.getLista(index);
         menuLista(lista);
     }
 
@@ -128,30 +128,69 @@ public class Main {
     }
 
     private static void adicionarTarefa(ListaDeTarefas lista) {
-        //TODO
+        IO.print("Descrição da tarefa: ");
+        String descricao = IO.input();
+        Tarefa novaTarefa = new Tarefa(descricao, false);
+        lista.addTarefa(novaTarefa);
+        IO.println("\nTarefa adicionada!");
     }
 
     private static void marcarConcluida(ListaDeTarefas lista) throws MsgException {
-        //TODO
+        if (lista.getTotalTarefas() == 0) {
+            IO.println("\nLista vazia!");
+            return;
+        }
+        
+        IO.print("Índice da tarefa: ");
+        int index = IO.inputInt();
+        lista.marcarTarefaConcluida(index);
+        IO.println("\nTarefa marcada como concluída!");
     }
 
     private static void desmarcarConcluida(ListaDeTarefas lista) throws MsgException {
-        //TODO
+        if (lista.getTotalTarefas() == 0) {
+            IO.println("Lista vazia!");
+            return;
+        }
+        
+        IO.print("Índice da tarefa: ");
+        int index = IO.inputInt();
+        lista.desmarcarTarefaConcluida(index);
+        IO.println("\nTarefa desmarcada!");
     }
 
     private static void removerTarefa(ListaDeTarefas lista) throws MsgException {
-        //TODO
+        if (lista.getTotalTarefas() == 0) {
+            IO.println("\nLista vazia!");
+            return;
+        }
+        
+        IO.print("Índice da tarefa: ");
+        int index = IO.inputInt();
+        lista.removerTarefa(index);
+        IO.println("\nTarefa removida!");
     }
 
     private static void removerConcluidas(ListaDeTarefas lista) throws MsgException {
-       //TODO
+        lista.removerTarefasConcluidas();
+        IO.println("\nTarefas concluídas removidas!");
     }
 
     private static void removerLista() throws MsgException {
-        //TODO
+        if (gerenciador.quantidadeListas() == 0) {
+            IO.println("\nNenhuma lista disponível!");
+            return;
+        }
+        
+        gerenciador.exibirListas();
+        IO.print("Índice da lista: ");
+        int index = IO.inputInt();
+        gerenciador.removerLista(index);
+        IO.println("\nLista removida!");
     }
 
     private static void removerListasConcluidas() throws MsgException {
-        //TODO
+        gerenciador.removerListasConcluidas();
+        IO.println("\nListas concluídas removidas!");
     }
 }
